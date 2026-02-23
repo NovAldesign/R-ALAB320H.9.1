@@ -7,7 +7,9 @@ export default function App() {
     { id: 3, title: "Clean the bathroom", completed: true, isEditing: false },
   ]);
 
-return (
+   const [editText, setEditText] = useState("");
+
+ return (
     <div>
       <h1>Todo List</h1>
       <ul>
@@ -22,15 +24,49 @@ return (
                 ))
               }
             />
-            <span>{todo.title}</span>
-            <button
-            disabled={!todo.completed}
-            onClick={() => setTodos(todos.filter((t) => t.id !== todo.id))}>
-          Delete
-          </button>
+
+            {todo.isEditing ? (
+              <>
+                <input
+                  type="text"
+                  value={editText}
+                  onChange={(e) => setEditText(e.target.value)}
+                />
+                <button
+                  onClick={() =>
+                    setTodos(todos.map((t) =>
+                      t.id === todo.id ? { ...t, title: editText, isEditing: false } : t
+                    ))
+                  }
+                >
+                  Save
+                </button>
+              </>
+            ) : (
+              <>
+                <span>{todo.title}</span>
+                <button
+                  onClick={() => {
+                    setEditText(todo.title);
+                    setTodos(todos.map((t) =>
+                      t.id === todo.id ? { ...t, isEditing: true } : t
+                    ));
+                  }}
+                >
+                  Edit
+                </button>
+                <button
+                  disabled={!todo.completed}
+                  onClick={() => setTodos(todos.filter((t) => t.id !== todo.id))}
+                >
+                  Delete
+                </button>
+              </>
+            )}
           </li>
         ))}
       </ul>
     </div>
   );
 }
+  
