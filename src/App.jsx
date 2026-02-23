@@ -22,7 +22,7 @@ export default function App() {
  return (
     <div>
       <h1>Todo List</h1>
-<div>
+<div className="add-todo">
   <input
     type="text"
     value={newTodo}
