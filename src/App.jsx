@@ -10,6 +10,13 @@ export default function App() {
   return (
     <div>
       <h1>Todo List</h1>
+      <ul>
+        {todos.map((todo) => (
+          <li key={todo.title}>
+            <span>{todo.title}</span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
