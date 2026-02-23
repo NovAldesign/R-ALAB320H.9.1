@@ -23,6 +23,11 @@ return (
               }
             />
             <span>{todo.title}</span>
+            <button
+            disabled={!todo.completed}
+            onClick={() => setTodos(todos.filter((t) => t.id !== todo.id))}>
+          Delete
+          </button>
           </li>
         ))}
       </ul>
