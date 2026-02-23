@@ -7,12 +7,21 @@ export default function App() {
     { id: 3, title: "Clean the bathroom", completed: true, isEditing: false },
   ]);
 
-  return (
+return (
     <div>
       <h1>Todo List</h1>
       <ul>
         {todos.map((todo) => (
-          <li key={todo.title}>
+          <li key={todo.id}>
+            <input
+              type="checkbox"
+              checked={todo.completed}
+              onChange={() =>
+                setTodos(todos.map((t) =>
+                  t.id === todo.id ? { ...t, completed: !t.completed } : t
+                ))
+              }
+            />
             <span>{todo.title}</span>
           </li>
         ))}
@@ -20,4 +29,3 @@ export default function App() {
     </div>
   );
 }
-
