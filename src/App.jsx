@@ -8,10 +8,31 @@ export default function App() {
   ]);
 
    const [editText, setEditText] = useState("");
+   const [newTodo, setNewTodo] = useState("");
+
+  const handleAddTodo = () => {
+  if (newTodo.trim() === "") return;
+  setTodos([
+    { id: Date.now(), title: newTodo, completed: false, isEditing: false },
+    ...todos,
+  ]);
+  setNewTodo("");
+};
 
  return (
     <div>
       <h1>Todo List</h1>
+<div>
+  <input
+    type="text"
+    value={newTodo}
+    placeholder="Add a new todo..."
+    onChange={(e) => setNewTodo(e.target.value)}
+    onKeyDown={(e) => e.key === "Enter" && handleAddTodo()}
+  />
+  <button onClick={handleAddTodo}>Add Todo</button>
+</div>
+
       <ul>
         {todos.map((todo) => (
           <li key={todo.id}>
